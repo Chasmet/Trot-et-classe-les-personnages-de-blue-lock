@@ -1,21 +1,15 @@
 package com.chk.bluelocktier;
 
-public class CharacterItem {
+public final class CharacterItem {
     public final String id;
     public final String name;
     public final String rarity;
-    public final String role;
-    public final String defaultTier;
-    public String tier;
     public boolean checked;
 
-    public CharacterItem(String id, String name, String rarity, String role, String defaultTier) {
+    public CharacterItem(String id, String name, String rarity) {
         this.id = id;
         this.name = name;
         this.rarity = rarity;
-        this.role = role;
-        this.defaultTier = defaultTier;
-        this.tier = defaultTier;
         this.checked = false;
     }
 }
