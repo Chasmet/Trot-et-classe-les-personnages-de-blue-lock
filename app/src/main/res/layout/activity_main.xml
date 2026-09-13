@@ -55,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="8 familles officielles • image au-dessus • nom • petite case à cocher"
+        android:text="8 familles • touchez une image pour l’ajouter/changer • Ajouter une case dans chaque famille"
         android:textColor="@color/muted"
         android:textSize="12sp" />
 
@@ -80,7 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:text="Appuie sur la petite case d’un personnage pour le cocher ou le décocher. Ton choix est sauvegardé sur le téléphone."
+        android:text="La case à cocher reste inchangée : un appui coche, un nouvel appui décoche. Les choix, images et nouvelles cases sont sauvegardés sur le téléphone."
         android:textColor="@color/muted"
         android:textSize="12sp" />
 
