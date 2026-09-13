@@ -1,9 +1,11 @@
 package com.chk.bluelocktier;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +19,8 @@ import java.util.List;
 public final class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public interface Listener {
         void onCheckedChanged(CharacterItem item);
+        void onAddRequested(String rarity);
+        void onImageRequested(CharacterItem item);
     }
 
     private static final int TYPE_SECTION = 0;
@@ -43,8 +47,6 @@ public final class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 if (rarity.equals(item.rarity)) count++;
             }
 
-            // Le titre de famille reste visible même lorsque la recherche ne renvoie
-            // aucun personnage : l'interface conserve toujours les 8 familles.
             rows.add(Row.section(rarity, count));
             for (CharacterItem item : items) {
                 if (rarity.equals(item.rarity)) {
@@ -92,6 +94,7 @@ public final class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             SectionHolder sectionHolder = (SectionHolder) holder;
             sectionHolder.title.setText(row.section);
             sectionHolder.count.setText(row.sectionCount + " personnage" + (row.sectionCount > 1 ? "s" : ""));
+            sectionHolder.addButton.setOnClickListener(v -> listener.onAddRequested(row.section));
             return;
         }
 
@@ -99,6 +102,7 @@ public final class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         CharacterItem item = row.character;
         characterHolder.name.setText(item.name);
         bindProfileImage(characterHolder.profileImage, item);
+        characterHolder.profileImage.setOnClickListener(v -> listener.onImageRequested(item));
 
         characterHolder.checkBox.setOnCheckedChangeListener(null);
         characterHolder.checkBox.setChecked(item.checked);
@@ -117,14 +121,25 @@ public final class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     private static void bindProfileImage(ImageView imageView, CharacterItem item) {
         Context context = imageView.getContext();
+
+        if (item.imageUri != null && !item.imageUri.trim().isEmpty()) {
+            try {
+                imageView.setImageURI(Uri.parse(item.imageUri));
+                imageView.setContentDescription("Image de profil de " + item.name + ". Appuyer pour la changer.");
+                return;
+            } catch (Exception ignored) {
+                // Repli vers une ressource intégrée ou le placeholder.
+            }
+        }
+
         String resourceName = "profile_" + item.id;
         int resourceId = context.getResources().getIdentifier(resourceName, "drawable", context.getPackageName());
         if (resourceId != 0) {
             imageView.setImageResource(resourceId);
-            imageView.setContentDescription("Image de profil de " + item.name);
+            imageView.setContentDescription("Image de profil de " + item.name + ". Appuyer pour la changer.");
         } else {
             imageView.setImageResource(R.drawable.profile_placeholder);
-            imageView.setContentDescription("Image de profil à ajouter pour " + item.name);
+            imageView.setContentDescription("Ajouter une image de profil pour " + item.name);
         }
     }
 
@@ -136,11 +151,13 @@ public final class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     static final class SectionHolder extends RecyclerView.ViewHolder {
         final TextView title;
         final TextView count;
+        final Button addButton;
 
         SectionHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.sectionTitle);
             count = itemView.findViewById(R.id.sectionCount);
+            addButton = itemView.findViewById(R.id.sectionAddButton);
         }
     }
 
