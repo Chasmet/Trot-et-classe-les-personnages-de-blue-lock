@@ -9,8 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Réglages"
-        android:textStyle="bold"
-        android:textSize="22sp" />
+        android:textSize="22sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/versionText"
@@ -38,13 +38,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Réinitialiser le classement"
+        android:text="Tout décocher"
         android:textAllCaps="false" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Les rangs sont sauvegardés sur le téléphone et restent présents après une mise à jour installée par-dessus l’application."
+        android:text="Les cases cochées sont sauvegardées sur le téléphone et restent présentes après une mise à jour installée par-dessus l’application."
         android:textSize="12sp" />
 </LinearLayout>

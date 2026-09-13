@@ -8,14 +8,15 @@
     android:orientation="horizontal"
     android:padding="12dp">
 
-    <TextView
-        android:id="@+id/avatar"
-        android:layout_width="46dp"
-        android:layout_height="46dp"
-        android:gravity="center"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:textSize="16sp" />
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:background="@drawable/bg_card"
+        android:contentDescription="Image de profil"
+        android:padding="2dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/profile_placeholder" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -23,13 +24,15 @@
         android:layout_marginStart="12dp"
         android:layout_weight="1"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/meta"
             android:layout_width="match_parent"
@@ -39,11 +42,13 @@
             android:textSize="12sp" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/tierButton"
-        android:layout_width="64dp"
+    <CheckBox
+        android:id="@+id/characterCheckBox"
+        android:layout_width="48dp"
         android:layout_height="48dp"
-        android:text="S+"
-        android:textStyle="bold"
-        android:textAllCaps="false" />
+        android:buttonTint="@color/blue"
+        android:gravity="center"
+        android:scaleX="1.35"
+        android:scaleY="1.35" />
+
 </LinearLayout>
